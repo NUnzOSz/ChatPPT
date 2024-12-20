@@ -2,7 +2,9 @@
 
 from abc import ABC, abstractmethod
 
-from langchain_openai import ChatOpenAI
+
+#from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder  # 导入提示模板相关类
 from langchain_core.messages import HumanMessage  # 导入消息类
 from langchain_core.runnables.history import RunnableWithMessageHistory  # 导入带有消息历史的可运行类
@@ -44,8 +46,9 @@ class ChatBot(ABC):
         ])
 
         # 初始化 ChatOllama 模型，配置参数
-        self.chatbot = system_prompt | ChatOpenAI(
-            model="gpt-4o-mini",
+        self.chatbot = system_prompt | ChatOllama( #ChatOpenAI(
+            #model="gpt-4o-mini",
+            model="qwen2.5:latest",
             temperature=0.5,
             max_tokens=4096
         )
